@@ -7,7 +7,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/Abrechen2/TravStats/issues</Support>
+  <Support>https://forums.unraid.net/topic/198320-support-travstats-self-hosted-flight-tracker/</Support>
   <Project>https://github.com/Abrechen2/TravStats</Project>
   <Overview>Self-hosted flight tracker for small households and groups (1–10 users). Record flights, visualise routes on interactive 2D/3D maps, collect 58 achievements, scan boarding passes (QR/barcode/OCR), import from email and PDF via an optional local Ollama LLM. Includes automated database backups with retention, optional WebDAV off-site sync, and encrypted API-key storage.
 

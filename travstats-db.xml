@@ -7,7 +7,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/Abrechen2/TravStats/issues</Support>
+  <Support>https://forums.unraid.net/topic/198320-support-travstats-self-hosted-flight-tracker/</Support>
   <Project>https://github.com/postgis/docker-postgis</Project>
   <Overview>PostgreSQL 15 with the PostGIS 3.4 spatial extension — the database TravStats expects.
 
