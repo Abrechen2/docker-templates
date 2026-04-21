@@ -15,9 +15,24 @@ This template is pre-filled with the container name `travstats-db` and the datab
 
 **Install order:** this container **first**, then the TravStats template. The database is published on the Unraid host at port 5432 (adjustable below) so TravStats can reach it via `host.docker.internal:5432` without needing a shared Docker network. Keep the port free of conflicts with other PostgreSQL containers you may already run.
 
-**Storage:** the default Application Data path (`/mnt/user/appdata/travstats-db`) maps to PostgreSQL's data directory. The initial cluster is created on first start and then kept in place on updates; deleting that directory wipes the database, so point your backup tool at it.
+**Storage:** the default Application Data path (`/mnt/user/appdata/travstats-db`) maps to PostgreSQL's data directory. The actual cluster lives in a `pgdata/` subdirectory (see the `PGDATA` variable below) — this is the officially recommended layout from the `postgres` Docker image and avoids a well-known Unraid permission issue where `chown` from inside the container can't reach the FUSE-backed share root.
 
-**Why PostGIS, not plain Postgres?** TravStats uses PostGIS for airport and route geometry. Plain `postgres:15` fails the first TravStats migration.</Overview>
+The initial cluster is created on first start and then kept in place on updates; deleting the `pgdata/` subdirectory wipes the database, so point your backup tool at this folder.
+
+**Why PostGIS, not plain Postgres?** TravStats uses PostGIS for airport and route geometry. Plain `postgres:15` fails the first TravStats migration.
+
+---
+
+**Troubleshooting — "FATAL: could not open file global/pg_filenode.map: Permission denied"**
+
+If you see this error in the container log and TravStats shows "Error querying the database" on its setup page, your `pgdata/` directory was created under the wrong UID by a previous (broken) install. Fix:
+
+1. Stop both containers (`TravStats`, `travstats-db`).
+2. On the Unraid console: `rm -rf /mnt/user/appdata/travstats-db/pgdata` *(or whichever Application Data path you chose)*.
+3. Start `travstats-db` — it now re-runs `initdb` with the correct UID (999, the Postgres user inside the image).
+4. Start `TravStats` — setup page should load without errors.
+
+If the fresh start still fails on `/mnt/user/...`, switch the Application Data path to `/mnt/cache/appdata/travstats-db` (direct cache-pool mount, bypasses Unraid's FUSE layer) and repeat step 3. Requires a cache pool to be configured.</Overview>
   <Category>Productivity: Tools:</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/travstats-db.xml</TemplateURL>
@@ -28,7 +43,9 @@ This template is pre-filled with the container name `travstats-db` and the datab
   <DateInstalled/>
   <Requires>Used together with the TravStats Community Apps template.</Requires>
 
-  <Config Name="Application Data" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/travstats-db" Mode="rw" Description="PostgreSQL data directory — one persistent mount, survives container updates. Back this path up with your regular appdata backup." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/travstats-db</Config>
+  <Config Name="Application Data" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/travstats-db" Mode="rw" Description="Parent directory for the PostgreSQL data. The actual cluster is created as a `pgdata/` subfolder here (see PGDATA). One persistent mount, survives container updates. Back this path up with your regular appdata backup." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/travstats-db</Config>
+
+  <Config Name="PGDATA" Target="PGDATA" Default="/var/lib/postgresql/data/pgdata" Mode="" Description="Actual PostgreSQL data subdirectory inside the Application Data mount. Using a subfolder (instead of the bind-mount root) is the official postgres-image recommendation and avoids a common Unraid FUSE permission issue. Do not change unless you know what you're doing." Type="Variable" Display="advanced" Required="true" Mask="false">/var/lib/postgresql/data/pgdata</Config>
 
   <Config Name="POSTGRES_DB" Target="POSTGRES_DB" Default="flights" Mode="" Description="Database name. TravStats default expects 'flights'." Type="Variable" Display="always" Required="true" Mask="false">flights</Config>
 

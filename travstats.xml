@@ -28,6 +28,8 @@ After first start, open http://[IP]:[PORT:80]/setup — the first-run wizard cap
 
 The JWT secret and encryption key are auto-generated on first boot and persisted inside the Application Data mount (`/mnt/user/appdata/travstats/secrets/`) — single volume, survives container updates.
 
+**Troubleshooting — setup page shows "Error querying the database":** the `travstats-db` data directory was left with the wrong UID (classic Unraid bind-mount issue). Fix is in the travstats-db template README — short version: stop both containers, `rm -rf /mnt/user/appdata/travstats-db/pgdata`, start `travstats-db`, then start TravStats. Full guide: https://github.com/Abrechen2/docker-templates#troubleshooting---fatal-could-not-open-file-globalpg_filenodemap-permission-denied
+
 **Full documentation:** https://github.com/Abrechen2/TravStats</Overview>
   <Category>Other: HomeAutomation: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
