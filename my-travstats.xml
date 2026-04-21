@@ -33,8 +33,8 @@ The JWT secret and encryption key are auto-generated on first boot and persisted
 **Full documentation:** https://github.com/Abrechen2/TravStats</Overview>
   <Category>Other: HomeAutomation: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/travstats.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/Abrechen2/TravStats/main/docs/images/logo-large.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/my-travstats.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/TravStats/Main/docs/images/logo-large.png</Icon>
   <ExtraParams>--restart=unless-stopped --add-host=host.docker.internal:host-gateway</ExtraParams>
   <PostArgs/>
   <CPUset/>

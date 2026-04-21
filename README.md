@@ -8,12 +8,14 @@ Self-hosted flight tracker — [github.com/Abrechen2/TravStats](https://github.c
 
 Two templates; install in this order:
 
-1. **[travstats-db.xml](travstats-db.xml)** — PostgreSQL 15 + PostGIS 3.4, pre-configured for TravStats (DB `flights`, user `flights`, published on host port 5432).
-2. **[travstats.xml](travstats.xml)** — The app itself. Reaches the DB via `host.docker.internal:5432`, so no custom Docker network required.
+1. **[my-travstats-db.xml](my-travstats-db.xml)** — PostgreSQL 15 + PostGIS 3.4, pre-configured for TravStats (DB `flights`, user `flights`, published on host port 5432).
+2. **[my-travstats.xml](my-travstats.xml)** — The app itself. Reaches the DB via `host.docker.internal:5432`, so no custom Docker network required.
+
+The `my-` prefix is Unraid's convention for user-added (i.e. not-yet-in-CA) templates — files under `/boot/config/plugins/dockerMan/templates-user/` are expected to be named `my-<Name>.xml`.
 
 After the app container is healthy, open `http://<unraid-ip>:<port>/setup` and create an admin account.
 
-Install guide: [docs/unraid/README.md](https://github.com/Abrechen2/TravStats/blob/main/docs/unraid/README.md) in the main repo.
+Install guide: [docs/unraid/README.md](https://github.com/Abrechen2/TravStats/blob/Main/docs/unraid/README.md) in the main repo.
 
 ### Troubleshooting — `FATAL: could not open file "global/pg_filenode.map": Permission denied`
 
