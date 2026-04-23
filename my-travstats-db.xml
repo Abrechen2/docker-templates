@@ -36,7 +36,7 @@ If the fresh start still fails on `/mnt/user/...`, switch the Application Data p
   <Category>Productivity: Tools:</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/my-travstats-db.xml</TemplateURL>
-  <Icon>https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgis_logo.png/320px-Postgis_logo.png</Icon>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon-travstats-db.svg</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>
