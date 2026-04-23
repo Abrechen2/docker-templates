@@ -12,7 +12,7 @@ Install order: travstats-db first, then TravStats. Both containers reach each ot
 
 Support: GitHub issues at https://github.com/Abrechen2/TravStats/issues or the Unraid support thread linked below. README and troubleshooting live in the repository homepage.
   </Profile>
-  <Icon>https://raw.githubusercontent.com/Abrechen2/TravStats/Main/docs/images/logo-large.png</Icon>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon.svg</Icon>
   <WebPage>https://github.com/Abrechen2/docker-templates</WebPage>
   <Forum>https://forums.unraid.net/topic/198320-support-travstats-self-hosted-flight-tracker/</Forum>
   <DonateLink>https://www.paypal.com/donate?hosted_button_id=HW9MPYVURCT42</DonateLink>
