@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <Profile>
+This repository hosts Unraid Community Apps templates for Abrechen2's self-hosted projects.
+
+Currently published:
+
+- TravStats — self-hosted flight tracker for small households and groups (1–10 users). Record flights, visualise routes on interactive 2D/3D maps, collect 58 achievements, scan boarding passes (QR/barcode/OCR), import bookings from email and PDF via an optional local Ollama LLM, automated backups with retention, optional WebDAV off-site sync, encrypted API-key storage.
+- travstats-db — the pre-configured PostgreSQL 15 + PostGIS 3.4 companion database TravStats expects. Ships with the database/user pair already aligned to the TravStats default DATABASE_URL — only the password needs filling in.
+
+Install order: travstats-db first, then TravStats. Both containers reach each other through the Unraid host via host.docker.internal, so no custom Docker network is required.
+
+Support: GitHub issues at https://github.com/Abrechen2/TravStats/issues or the Unraid support thread linked below. README and troubleshooting live in the repository homepage.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/TravStats/Main/docs/images/logo-large.png</Icon>
+  <WebPage>https://github.com/Abrechen2/docker-templates</WebPage>
+  <Forum>https://forums.unraid.net/topic/198320-support-travstats-self-hosted-flight-tracker/</Forum>
+  <DonateLink>https://www.paypal.com/donate?hosted_button_id=HW9MPYVURCT42</DonateLink>
+  <DonateText>Support TravStats development</DonateText>
+</CommunityApplications>
