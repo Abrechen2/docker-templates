@@ -31,7 +31,7 @@ The JWT secret and encryption key are auto-generated on first boot and persisted
 **Troubleshooting — setup page shows "Error querying the database":** the `travstats-db` data directory was left with the wrong UID (classic Unraid bind-mount issue). Fix: stop both containers, `rm -rf /mnt/user/appdata/travstats-db/pgdata`, start `travstats-db`, then start TravStats. Full guide is in the travstats-db template Overview.
 
 **Full documentation:** https://github.com/Abrechen2/TravStats</Overview>
-  <Category>Other: HomeAutomation: Productivity:</Category>
+  <Category>Cloud: Productivity: Tools:Utilities Other:</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/my-travstats.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/Abrechen2/TravStats/Main/docs/images/logo.svg</Icon>

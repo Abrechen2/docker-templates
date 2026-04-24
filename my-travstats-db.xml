@@ -33,7 +33,7 @@ If you see this error in the container log and TravStats shows "Error querying t
 4. Start `TravStats` — setup page should load without errors.
 
 If the fresh start still fails on `/mnt/user/...`, switch the Application Data path to `/mnt/cache/appdata/travstats-db` (direct cache-pool mount, bypasses Unraid's FUSE layer) and repeat step 3. Requires a cache pool to be configured.</Overview>
-  <Category>Productivity: Tools:</Category>
+  <Category>Tools:Utilities Other:</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/my-travstats-db.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon-travstats-db.svg</Icon>
