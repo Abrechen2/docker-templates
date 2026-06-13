@@ -26,9 +26,11 @@ Sublarr is self-contained — it stores everything in an embedded SQLite databas
 
 Map the **Media Path** to the same library root your Sonarr/Radarr/Jellyfin see, so subtitle files land next to your videos.
 
+**Configuration is UI-first.** This template only exposes the handful of boot-level settings (ports, paths, IDs, optional API key / database / log level). Everything else — Sonarr/Radarr connections, provider API keys, language profiles, translation backends, path mapping, automation — is configured in the web UI under Settings and stored in the database. There is no need to set those as environment variables.
+
 **Optional backends:** PostgreSQL and Redis are supported for larger setups via the `SUBLARR_DATABASE_URL` / `SUBLARR_REDIS_URL` variables (advanced) — point them at your own containers. Not needed for normal use.
 
-**Optional translation:** install the Ollama Community App, pull a general model (e.g. `qwen2.5:14b-instruct`), and set the Ollama URL below to `http://host.docker.internal:11434`. Translation is disabled by default.
+**Optional translation (experimental):** install the Ollama Community App and pull a general model (e.g. `qwen2.5:14b-instruct`), then point Sublarr at it under Settings → Translation in the web UI (e.g. `http://host.docker.internal:11434`). Disabled by default.
 
 **Full documentation:** https://sublarr.de/docs/ · **Source:** https://github.com/Abrechen2/sublarr</Overview>
   <Category>MediaApp:Video Downloaders: Tools:Utilities</Category>
@@ -56,23 +58,9 @@ Map the **Media Path** to the same library root your Sonarr/Radarr/Jellyfin see,
 
   <Config Name="API Key" Target="SUBLARR_API_KEY" Default="" Mode="" Description="Optional API key (X-Api-Key header) protecting the API. Strongly recommended if the port is exposed beyond your LAN." Type="Variable" Display="advanced" Required="false" Mask="true"/>
 
-  <Config Name="Sonarr URL" Target="SUBLARR_SONARR_URL" Default="" Mode="" Description="Sonarr instance URL for library refresh, e.g. http://YOUR_SERVER_IP:8989. Leave empty for standalone mode." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-
-  <Config Name="Sonarr API Key" Target="SUBLARR_SONARR_API_KEY" Default="" Mode="" Description="Sonarr API key (Settings → General in Sonarr)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-
-  <Config Name="Radarr URL" Target="SUBLARR_RADARR_URL" Default="" Mode="" Description="Radarr instance URL, e.g. http://YOUR_SERVER_IP:7878. Leave empty for standalone mode." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-
-  <Config Name="Radarr API Key" Target="SUBLARR_RADARR_API_KEY" Default="" Mode="" Description="Radarr API key (Settings → General in Radarr)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
-
-  <Config Name="Target Language" Target="SUBLARR_TARGET_LANGUAGE" Default="de" Mode="" Description="Default target subtitle language (ISO 639-1), e.g. de or en. Configurable per series/film in the UI." Type="Variable" Display="advanced" Required="false" Mask="false">de</Config>
-
-  <Config Name="Ollama URL" Target="SUBLARR_OLLAMA_URL" Default="" Mode="" Description="Optional Ollama server URL for LLM translation, e.g. http://host.docker.internal:11434. Leave empty to disable translation." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-
-  <Config Name="Ollama Model" Target="SUBLARR_OLLAMA_MODEL" Default="qwen2.5:14b-instruct" Mode="" Description="Ollama model used for translation when an Ollama URL is set." Type="Variable" Display="advanced" Required="false" Mask="false">qwen2.5:14b-instruct</Config>
-
-  <Config Name="Path Mapping" Target="SUBLARR_PATH_MAPPING" Default="" Mode="" Description="Remote=Local path mapping for split *arr setups (semicolon-separated), e.g. /data/media=/mnt/user/media." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-
   <Config Name="Database URL" Target="SUBLARR_DATABASE_URL" Default="" Mode="" Description="Advanced: PostgreSQL DSN to use Postgres instead of the built-in SQLite, e.g. postgresql://sublarr:PASSWORD@host.docker.internal:5432/sublarr. Leave empty for SQLite (recommended)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 
   <Config Name="Redis URL" Target="SUBLARR_REDIS_URL" Default="" Mode="" Description="Advanced: Redis connection string for the job queue, e.g. redis://host.docker.internal:6379/0. Leave empty to use the in-process queue (recommended)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <Config Name="Log Level" Target="SUBLARR_LOG_LEVEL" Default="INFO" Mode="" Description="Advanced: log verbosity — DEBUG, INFO, WARNING or ERROR." Type="Variable" Display="advanced" Required="false" Mask="false">INFO</Config>
 </Container>
