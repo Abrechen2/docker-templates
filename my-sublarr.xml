@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Sublarr</Name>
+  <Repository>ghcr.io/abrechen2/sublarr:latest</Repository>
+  <Registry>https://github.com/Abrechen2/sublarr/pkgs/container/sublarr</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Abrechen2/sublarr/issues</Support>
+  <Project>https://github.com/Abrechen2/sublarr</Project>
+  <Overview>Self-hosted subtitle manager for anime and media libraries — a *arr-style companion (and Bazarr alternative) that automatically searches, scores and downloads the best subtitle, then gives you tools to edit, sync and convert it. Runs entirely on your LAN; no cloud required.
+
+**What it does:**
+
+- Searches 21 subtitle providers in parallel (AnimeTosho, Jimaku, OpenSubtitles, SubDL, Subscene, Subf2m, Subsource, SubsDump, Addic7ed, BetaSeries, Titlovi, Titrari, TVSubtitles, Gestdown, Kitsunekko, Napisy24, Podnapisi, YIFY, Zimuku, LegendasDivX, TurkceAltyazi) plus embedded subtitle extraction.
+- ASS-first scoring with format, dialect, sync-quality and uploader-trust weighting; smart de-duplication; per-provider circuit breakers.
+- Sonarr/Radarr webhook integration (multi-instance), Jellyfin/Emby/Plex/Kodi library refresh, AniDB absolute-episode-order handling.
+- Standalone mode (no *arr required): watches a folder and reads .nfo metadata.
+- Subtitle toolbox: Aegisub-class waveform editor, ffsubsync/alass sync, format conversion, an 18-step post-processing pipeline, batch OCR and Whisper fallback.
+- Optional LLM translation (Ollama / DeepL / Google / LibreTranslate / OpenAI-compatible) — experimental; quality varies.
+
+**Setup:**
+
+Sublarr is self-contained — it stores everything in an embedded SQLite database, so **no separate database container is required**. After the container is healthy, open http://[IP]:[PORT:5765] and the first-run onboarding wizard walks you through language selection, provider keys and automation. Sonarr/Radarr are optional.
+
+Map the **Media Path** to the same library root your Sonarr/Radarr/Jellyfin see, so subtitle files land next to your videos.
+
+**Optional backends:** PostgreSQL and Redis are supported for larger setups via the `SUBLARR_DATABASE_URL` / `SUBLARR_REDIS_URL` variables (advanced) — point them at your own containers. Not needed for normal use.
+
+**Optional translation:** install the Ollama Community App, pull a general model (e.g. `qwen2.5:14b-instruct`), and set the Ollama URL below to `http://host.docker.internal:11434`. Translation is disabled by default.
+
+**Full documentation:** https://sublarr.de/docs/ · **Source:** https://github.com/Abrechen2/sublarr</Overview>
+  <Category>MediaApp:Video Downloaders: Tools:Utilities</Category>
+  <WebUI>http://[IP]:[PORT:5765]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/my-sublarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/sublarr/master/logo.png</Icon>
+  <ExtraParams>--restart=unless-stopped --add-host=host.docker.internal:host-gateway</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText>If Sublarr is useful to you</DonateText>
+  <DonateLink>https://www.paypal.com/donate?hosted_button_id=GLXYTD3FV9Y78</DonateLink>
+
+  <Config Name="WebUI Port" Target="5765" Default="5765" Mode="tcp" Description="Host port for the Sublarr web UI and API. Swagger UI is available at /api/docs." Type="Port" Display="always" Required="true" Mask="false">5765</Config>
+
+  <Config Name="Config Path" Target="/config" Default="/mnt/user/appdata/sublarr" Mode="rw" Description="Persistent application data — SQLite database, plugins, backups and logs. Single volume; nothing else needs to be mounted for normal use." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/sublarr</Config>
+
+  <Config Name="Media Path" Target="/media" Default="/mnt/user/media" Mode="rw" Description="Root of your media library. Must be the same path your Sonarr/Radarr/Jellyfin use so subtitles are written next to the video files." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/media</Config>
+
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID for file ownership. Unraid default is 99 (nobody)." Type="Variable" Display="always" Required="false" Mask="false">99</Config>
+
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID for file ownership. Unraid default is 100 (users)." Type="Variable" Display="always" Required="false" Mask="false">100</Config>
+
+  <Config Name="TZ" Target="TZ" Default="Europe/Berlin" Mode="" Description="Container timezone, e.g. Europe/Berlin or UTC." Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Berlin</Config>
+
+  <Config Name="API Key" Target="SUBLARR_API_KEY" Default="" Mode="" Description="Optional API key (X-Api-Key header) protecting the API. Strongly recommended if the port is exposed beyond your LAN." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <Config Name="Sonarr URL" Target="SUBLARR_SONARR_URL" Default="" Mode="" Description="Sonarr instance URL for library refresh, e.g. http://YOUR_SERVER_IP:8989. Leave empty for standalone mode." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <Config Name="Sonarr API Key" Target="SUBLARR_SONARR_API_KEY" Default="" Mode="" Description="Sonarr API key (Settings → General in Sonarr)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <Config Name="Radarr URL" Target="SUBLARR_RADARR_URL" Default="" Mode="" Description="Radarr instance URL, e.g. http://YOUR_SERVER_IP:7878. Leave empty for standalone mode." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <Config Name="Radarr API Key" Target="SUBLARR_RADARR_API_KEY" Default="" Mode="" Description="Radarr API key (Settings → General in Radarr)." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+
+  <Config Name="Target Language" Target="SUBLARR_TARGET_LANGUAGE" Default="de" Mode="" Description="Default target subtitle language (ISO 639-1), e.g. de or en. Configurable per series/film in the UI." Type="Variable" Display="advanced" Required="false" Mask="false">de</Config>
+
+  <Config Name="Ollama URL" Target="SUBLARR_OLLAMA_URL" Default="" Mode="" Description="Optional Ollama server URL for LLM translation, e.g. http://host.docker.internal:11434. Leave empty to disable translation." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <Config Name="Ollama Model" Target="SUBLARR_OLLAMA_MODEL" Default="qwen2.5:14b-instruct" Mode="" Description="Ollama model used for translation when an Ollama URL is set." Type="Variable" Display="advanced" Required="false" Mask="false">qwen2.5:14b-instruct</Config>
+
+  <Config Name="Path Mapping" Target="SUBLARR_PATH_MAPPING" Default="" Mode="" Description="Remote=Local path mapping for split *arr setups (semicolon-separated), e.g. /data/media=/mnt/user/media." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <Config Name="Database URL" Target="SUBLARR_DATABASE_URL" Default="" Mode="" Description="Advanced: PostgreSQL DSN to use Postgres instead of the built-in SQLite, e.g. postgresql://sublarr:PASSWORD@host.docker.internal:5432/sublarr. Leave empty for SQLite (recommended)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+
+  <Config Name="Redis URL" Target="SUBLARR_REDIS_URL" Default="" Mode="" Description="Advanced: Redis connection string for the job queue, e.g. redis://host.docker.internal:6379/0. Leave empty to use the in-process queue (recommended)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>

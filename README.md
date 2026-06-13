@@ -6,6 +6,7 @@ Unraid Community Apps templates for [Abrechen2](https://github.com/Abrechen2)'s 
 
 | File | App | Project |
 |---|---|---|
+| [`my-sublarr.xml`](my-sublarr.xml) | **Sublarr** — self-hosted subtitle manager for anime & media (Bazarr alternative) | [Abrechen2/sublarr](https://github.com/Abrechen2/sublarr) |
 | [`my-travstats.xml`](my-travstats.xml) | **TravStats** — self-hosted travel logbook (flights, cruises, more) | [Abrechen2/TravStats](https://github.com/Abrechen2/TravStats) |
 | [`my-travstats-db.xml`](my-travstats-db.xml) | **travstats-db** — PostgreSQL 15 + PostGIS 3.4 companion DB | [postgis/docker-postgis](https://github.com/postgis/docker-postgis) |
 

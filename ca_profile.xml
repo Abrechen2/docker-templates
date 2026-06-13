@@ -5,12 +5,13 @@ This repository hosts Unraid Community Apps templates for Abrechen2's self-hoste
 
 Currently published:
 
+- Sublarr — self-hosted subtitle manager for anime and media libraries; a *arr-style companion and Bazarr alternative. Searches 21 subtitle providers plus embedded extraction, scores ASS-first and downloads the best match, integrates with Sonarr/Radarr (webhooks) and Jellyfin/Emby/Plex/Kodi, or runs standalone by watching a folder. Includes an Aegisub-class waveform editor, ffsubsync/alass sync, format conversion, a post-processing pipeline, batch OCR, Whisper fallback, and optional (experimental) LLM translation via Ollama/DeepL/Google/LibreTranslate. Self-contained — uses an embedded SQLite database, so no separate database container is required.
 - TravStats — self-hosted travel logbook for small households and groups (1–10 users). It's a logbook, not a live tracker — you record trips manually, scan a boarding pass, or import an email/PDF; flights now, cruises in v2, hotels and POI on the roadmap. Visualise routes on interactive 2D/3D maps, collect 58 achievements, scan boarding passes (QR/barcode/OCR), import bookings from email and PDF via an optional local Ollama LLM, automated backups with retention, optional WebDAV off-site sync, encrypted API-key storage.
 - travstats-db — the pre-configured PostgreSQL 15 + PostGIS 3.4 companion database TravStats expects. Ships with the database/user pair already aligned to the TravStats default DATABASE_URL — only the password needs filling in.
 
-Install order: travstats-db first, then TravStats. Both containers reach each other through the Unraid host via host.docker.internal, so no custom Docker network is required.
+Install order: TravStats needs travstats-db first; Sublarr is self-contained and installs on its own. Containers reach each other through the Unraid host via host.docker.internal, so no custom Docker network is required.
 
-Support: GitHub issues at https://github.com/Abrechen2/TravStats/issues or the Unraid support thread linked below. README and troubleshooting live in the repository homepage.
+Support: GitHub issues at https://github.com/Abrechen2/sublarr/issues (Sublarr) or https://github.com/Abrechen2/TravStats/issues (TravStats). READMEs and troubleshooting live in each project's repository homepage.
   </Profile>
   <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon.svg</Icon>
   <WebPage>https://github.com/Abrechen2/docker-templates</WebPage>
