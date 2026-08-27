@@ -15,14 +15,14 @@
 
 TravStats needs a PostgreSQL 15 database with the PostGIS extension. Install the companion template **travstats-db** (same repo) first — it is pre-configured with database, user and published port so only the password needs filling in. TravStats reaches the database through the Unraid host via `host.docker.internal:5432`, so no custom Docker network is required — both containers just sit on the default `bridge` and talk through the host.
 
-If you bring your own PostGIS container instead, make sure it joins the same `travstats-net` network and uses:
+If you bring your own PostGIS container instead, publish its port on the Unraid host — the default `bridge` has no DNS, so TravStats cannot reach it by container name — and use:
 
 - Database name: `flights`
 - Username: `flights`
 - Password: *(strong — generate with `openssl rand -base64 32`)*
-- Container name: `travstats-db` (or adjust DATABASE_URL below)
+- Published host port: `5432` (or adjust the port in DATABASE_URL below)
 
-Optional: install the [Ollama Community App](https://unraid.net/community/apps?q=ollama) and pull `gemma3:12b` (~8 GB) for local AI parsing of flight confirmation emails. Point TravStats at it via Admin → Settings → Parser after login (no ENV variable needed).
+Optional: install the [Ollama Community App](https://unraid.net/community/apps?q=ollama) and pull `gemma3:12b` (~8 GB) for local AI parsing of flight confirmation emails. Keep its port `11434` published on the host, then point TravStats at `http://host.docker.internal:11434` via Admin → Settings → Parser after login (no ENV variable needed).
 
 After first start, open http://[IP]:[PORT:80]/setup — the first-run wizard captures instance name, public URL, user cap and registration mode. Everything else (API keys, backup schedule, WebDAV, Ollama endpoint + model) is configurable from the admin UI later. No ENV editing needed.
 
