@@ -36,7 +36,7 @@ If the fresh start still fails on `/mnt/user/...`, switch the Application Data p
   <Category>Tools:Utilities Other:</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/my-travstats-db.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon-travstats-db.svg</Icon>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon-travstats-db.png</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>

@@ -13,7 +13,7 @@ Install order: TravStats needs travstats-db first; Sublarr is self-contained and
 
 Support: GitHub issues at https://github.com/Abrechen2/sublarr/issues (Sublarr) or https://github.com/Abrechen2/TravStats/issues (TravStats). READMEs and troubleshooting live in each project's repository homepage.
   </Profile>
-  <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon.svg</Icon>
+  <Icon>https://raw.githubusercontent.com/Abrechen2/docker-templates/main/icon.png</Icon>
   <WebPage>https://github.com/Abrechen2/docker-templates</WebPage>
   <Forum>https://forums.unraid.net/topic/198320-support-travstats-self-hosted-flight-tracker/</Forum>
   <DonateLink>https://www.paypal.com/donate?hosted_button_id=HW9MPYVURCT42</DonateLink>
